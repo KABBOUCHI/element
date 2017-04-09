@@ -129,7 +129,11 @@
         type: Boolean,
         default: true
       },
-      onIconClick: Function
+      onIconClick: Function,
+      preventDefault: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {
@@ -170,6 +174,9 @@
         this.$emit('focus', event);
       },
       handleInput(event) {
+        if (this.preventDefault) {
+          event.preventDefault();
+        }
         const value = event.target.value;
         this.$emit('input', value);
         this.setCurrentValue(value);
